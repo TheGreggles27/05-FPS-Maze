@@ -1,0 +1,92 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/Materials/Ground/ground_12-4K/4K-ground_12_normal.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Materials/Ground/ground_12-4K/4K-ground_12_height.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Materials/Ground/ground_12-4K/4K-ground_12_ambientocclusion.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Materials/Ground/ground_12-4K/4K-ground_12_metallic.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Materials/Ground/ground_12-4K/4K-ground_12_basecolor.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Materials/Wall/ground_13-4K/ground_13_ambientocclusion-4K.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Materials/Wall/ground_13-4K/ground_13_normal-4K.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Materials/Wall/ground_13-4K/ground_13_roughness-4K.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Materials/Ground/ground_12-4K/4K-ground_12_roughness.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Materials/Wall/ground_13-4K/ground_13_basecolor-4K.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Materials/Wall/ground_13-4K/ground_13_height-4K.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Materials/Wall/ground_13-4K/ground_13_metallic-4K.png" type="Texture" id=12]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 5 )
+metallic_texture = ExtResource( 4 )
+roughness_texture = ExtResource( 9 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 1 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 3 )
+ao_on_uv2 = false
+ao_texture_channel = 4
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 2 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 10 )
+metallic_texture = ExtResource( 12 )
+metallic_texture_channel = 4
+roughness_texture = ExtResource( 8 )
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 7 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 6 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 11 )
+
+[node name="Tile7" type="Spatial"]
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 3 )
+
+[node name="North" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1 )
+use_collision = true
+height = 3.0
+depth = 0.1
+material = SubResource( 4 )
+
+[node name="South" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.053 )
+use_collision = true
+height = 3.0
+depth = 0.1
+material = SubResource( 4 )
+
+[node name="East" type="CSGBox" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 1.5, 0 )
+use_collision = true
+height = 3.0
+depth = 0.1
+material = SubResource( 4 )
